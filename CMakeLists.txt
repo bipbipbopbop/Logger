@@ -9,17 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 ### Main Target ###
 add_library(${PROJECT_NAME} INTERFACE)
-set(SRC_DIR "source/")
-
-# source files
-set(INC
-    Logger.hpp
-)
-
-list(TRANSFORM INC PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/${SRC_DIR})
 
 # add target dependencies
-target_sources(${PROJECT_NAME} INTERFACE ${INC})
+target_sources(${PROJECT_NAME} INTERFACE
+               ${CMAKE_CURRENT_SOURCE_DIR}/jhache/Logger.hpp
+)
 target_include_directories(${PROJECT_NAME} INTERFACE
-                           ${SRC_DIR}
+                           ${CMAKE_CURRENT_SOURCE_DIR}
 )
