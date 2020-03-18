@@ -12,8 +12,8 @@ add_library(${PROJECT_NAME} INTERFACE)
 
 # add target dependencies
 target_sources(${PROJECT_NAME} INTERFACE
-               ${CMAKE_CURRENT_SOURCE_DIR}/jhache/Logger.hpp
+               ${PROJECT_SOURCE_DIR}/jhache/Logger.hpp
 )
 target_include_directories(${PROJECT_NAME} INTERFACE
-                           ${CMAKE_CURRENT_SOURCE_DIR}
+                           ${PROJECT_SOURCE_DIR}/jhache
 )
