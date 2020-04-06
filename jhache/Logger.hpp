@@ -16,6 +16,9 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
+// disable warning C4996, for the use of localtime() func.
+#pragma warning(disable:4996)
+
 
 /* namespace Logger
  * A very simple, header-only Logger.
@@ -29,11 +32,11 @@ namespace Logger
 	// Level: represent the severity of the log
 	enum class Level : std::int8_t
 	{
-		DEBUG = -1,
-		INFO = 0,
-		WARNING = 1,
-		ERROR = 2,
-		FATAL = 3
+		Debug = -1,
+		Info = 0,
+		Warning = 1,
+		Error = 2,
+		Fatal = 3
 	};
 	
 	// Helper func for Level type printing
@@ -41,19 +44,19 @@ namespace Logger
 	{
 		switch (value)
 		{
-			case Level::DEBUG:
+			case Level::Debug:
 				out << "DEBUG";
 				break;
-			case Level::INFO:
+			case Level::Info:
 				out << "INFO";
 				break;
-			case Level::WARNING:
+			case Level::Warning:
 				out << "WARNING";
 				break;
-			case Level::ERROR:
+			case Level::Error:
 				out << "ERROR";
 				break;
-			case Level::FATAL:
+			case Level::Fatal:
 				out << "FATAL";
 				break;
 		}
@@ -134,7 +137,7 @@ namespace Logger
 		~StreamCollection()
 		{
 			std::stringstream	ss;
-			ss << Logger::_getTimeStr() << " [" << Level::INFO << "] Finish Logging.\n";
+			ss << Logger::_getTimeStr() << " [" << Level::Info << "] Finish Logging.\n";
 			*this << ss.str();
 		}
 
@@ -150,14 +153,14 @@ namespace Logger
 				this->_list.push_back(std::make_unique<SType>(std::forward<StreamT>(os)));
 
 			std::stringstream	ss;
-			ss << Logger::_getTimeStr() << " [" << Level::INFO << "] Start Logging.\n";
+			ss << Logger::_getTimeStr() << " [" << Level::Info << "] Start Logging.\n";
 			*this->_list.back() << ss.str();
 		}
 
 		void	clear()
 		{
 			std::stringstream	ss;
-			ss << Logger::_getTimeStr() << " [" << Level::INFO << "] Finish Logging.\n";
+			ss << Logger::_getTimeStr() << " [" << Level::Info << "] Finish Logging.\n";
 	
 			while (this->_list.size() > 1)//don't pop the LogFile stream
 			{
@@ -198,7 +201,7 @@ namespace Logger
 		(ss << ... << msg) << std::endl;
 
 		Logger::sinks << ss.str();
-		if (lvl == Level::FATAL)
+		if (lvl == Level::Fatal)
 			exit(1);
 	}
 };
