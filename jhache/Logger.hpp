@@ -38,7 +38,7 @@ namespace Logger
 		Error = 2,
 		Fatal = 3
 	};
-	
+
 	// Helper func for Level type printing
 	inline std::ostream	&operator<<(std::ostream &out, Logger::Level value)
 	{
